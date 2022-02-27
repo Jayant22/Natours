@@ -5,7 +5,7 @@ const app = express();
 
 const port = 8000;
 const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/dev-data/data/tours.json`)
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
 app.get('/', (req, res) => {
@@ -29,7 +29,11 @@ app.get('/Intours/v1/tours', (req, res) => {
 });
 
 app.post('/Intours/v1/tours', (req, res) => {
-    
+  console.log(req.body);
+  res.status(201).json({
+    status: 'success',
+    result: 'User Added',
+  });
 });
 
 app.listen(port, () => {
