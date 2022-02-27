@@ -3,7 +3,6 @@ const fs = require('fs');
 
 const app = express();
 
-const port = 8000;
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
@@ -28,14 +27,70 @@ app.get('/Intours/v1/tours', (req, res) => {
   });
 });
 
+// app.post('/Intours/v1/tours', (req, res) => {
+//   const newTour = Object.assign({ id: tours.length }, req.body);
+//   const latest_tours = [...tours, newTour];
+
+//   fs.writeFile(
+//     `${__dirname}/dev-data/data/tours-simple.json`,
+//     JSON.stringify(latest_tours),
+//     (err) => {
+//       if (err) {
+//         res.status(500).json({
+//           status: 'Failure',
+//           message: err.message,
+//         });
+//       } else {
+//         res.status(201).json({
+//           status: 'Success',
+//           result: 'User created',
+//           data: {
+//             newTour,
+//           },
+//         });
+//       }
+//     }
+//   );
+// });
+
 app.post('/Intours/v1/tours', (req, res) => {
-  console.log(req.body);
-  res.status(201).json({
-    status: 'success',
-    result: 'User Added',
+
+  fs.readFile(`${__dirname}/dev-data/data/tours-simple.json`, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        status: 'Failure',
+        message: err.message,
+      });
+    } else {
+      const latest_tours = JSON.parse(data);
+      const newTour = Object.assign({ id: latest_tours.length }, req.body);
+      latest_tours.push(newTour);
+      fs.writeFile(
+        `${__dirname}/dev-data/data/tours-simple.json`,
+        JSON.stringify(latest_tours),
+        (err) => {
+          if (err) {
+            res.status(500).json({
+              status: 'Failure',
+              message: err.message,
+            });
+          } else {
+            res.status(201).json({
+              status: 'Success',
+              result: 'User created',
+              data: {
+                newTour,
+              },
+            });
+            console.log('File written successfully');
+          }
+        }
+      );
+    }
   });
 });
 
+const port = 8000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
