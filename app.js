@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const morgan = require('morgan');
 
 const tourRouter = require('./routes/tourRoutes');
@@ -7,8 +6,12 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(express.static(`${__dirname}/public`));
 
 app.use('/Intours/v1/tours', tourRouter);
 app.use('/Intours/v1/users', userRouter);
@@ -22,28 +25,3 @@ app.get('/Intours/', (req, res) => {
 });
 
 module.exports = app;
-// app.post('/Intours/v1/tours', (req, res) => {
-//   const newTour = Object.assign({ id: tours.length }, req.body);
-//   const latest_tours = [...tours, newTour];
-
-//   fs.writeFile(
-//     `${__dirname}/dev-data/data/tours-simple.json`,
-//     JSON.stringify(latest_tours),
-//     (err) => {
-//       if (err) {
-//         res.status(500).json({
-//           status: 'Failure',
-//           message: err.message,
-//         });
-//       } else {
-//         res.status(201).json({
-//           status: 'Success',
-//           result: 'User created',
-//           data: {
-//             newTour,
-//           },
-//         });
-//       }
-//     }
-//   );
-// });
