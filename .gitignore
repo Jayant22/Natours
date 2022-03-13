@@ -130,3 +130,4 @@ $RECYCLE.BIN/
 node_modules
 public/img
 dev-data/img
+package-lock.json
