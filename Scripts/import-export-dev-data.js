@@ -20,7 +20,7 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-si
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await Tour.create(tours);x
+    await Tour.create(tours);
     console.log('Data successfully loaded!');
   } catch (err) {
     console.log(err);
