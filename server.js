@@ -10,7 +10,9 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+  // eslint-disable-next-line no-console
   .then(() => console.log('DB connection successful!'))
+  // eslint-disable-next-line no-console
   .catch((err) => console.warn(err));
 
 const app = require('./app');
