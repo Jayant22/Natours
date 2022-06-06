@@ -76,7 +76,12 @@ exports.getAllTours = async (req, res) => {
     // }
     // query = query.skip(skip).limit(limit);
 
-    const feature = new APIInterface(tourModel.find(), req.query).filter().sort().limitFields().paginate();
+    // eslint-disable-next-line prettier/prettier
+    const feature = new APIInterface(tourModel.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
 
     const tours = await feature.query;
 

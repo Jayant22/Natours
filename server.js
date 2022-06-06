@@ -13,7 +13,7 @@ mongoose
   // eslint-disable-next-line no-console
   .then(() => console.log('DB connection successful!'))
   // eslint-disable-next-line no-console
-  .catch((err) => console.warn(err));
+  .catch((err) => console.log(err));
 
 const app = require('./app');
 
@@ -22,3 +22,5 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Server is running on port http://127.0.0.1:${port}`);
 });
+
+//NDB TEST
