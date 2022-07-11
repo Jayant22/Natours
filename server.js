@@ -23,7 +23,11 @@ mongoose
 
 const app = require('./app');
 
-const port = process.env.PORT || 3000;
+let port;
+
+if (process.env.NODE_ENV == 'production') port = process.env.PRODUCTION_PORT;
+else port = process.env.DEVELOPMENT_PORT;
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Server is running on port http://127.0.0.1:${port}`);
