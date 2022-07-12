@@ -25,7 +25,7 @@ const app = require('./app');
 
 let port;
 
-if (process.env.NODE_ENV == 'production') port = process.env.PRODUCTION_PORT;
+if (process.env.NODE_ENV === 'production') port = process.env.PRODUCTION_PORT;
 else port = process.env.DEVELOPMENT_PORT;
 
 app.listen(port, () => {
