@@ -71,21 +71,14 @@ exports.createUser = (req, res) => {
   });
 };
 
-exports.getUserById = (req, res) => {
+exports.updateUser = (req, res) => {
   res.status(500).json({
     status: 'Error',
     results: 'Inaccessible Route Not Defined',
   });
 };
 
-exports.updateUserById = (req, res) => {
-  res.status(500).json({
-    status: 'Error',
-    results: 'Inaccessible Route Not Defined',
-  });
-};
-
-exports.deleteUserById = (req, res) => {
+exports.deleteUser = (req, res) => {
   res.status(500).json({
     status: 'Error',
     results: 'Inaccessible Route Not Defined',
