@@ -12,7 +12,7 @@ exports.aliasTopTours = (req, res, next) => {
 
 exports.getAllTours = catchAsync(async (req, res) => {
   // eslint-disable-next-line prettier/prettier
-  const feature = new APIInterface(tourModel.find(), req.query)
+  const feature = new APIInterface(tourModel.find().populate(), req.query)
     .filter()
     .sort()
     .limitFields()
